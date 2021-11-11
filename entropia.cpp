@@ -6,7 +6,7 @@ using namespace std;
 int main(){
 
     int c;
-    int contador;
+    int contador=0;
     map<int,int> m;
     map<int,int>::iterator it;
 
@@ -26,11 +26,13 @@ int main(){
 
     //cout<<m[27]<<endl;
 
-    int h = 0;
+    cout << "Contador " << contador << endl;
+
+    double h = 0;
 
     for(it = m.begin(); it != m.end(); it++){
 
-        h += (it->second / contador) * log2(contador / it->second);
+        h += ((double)it->second / (double)contador) * log2((double)contador / (double)it->second);
     }
 
     cout<<h<<endl;
