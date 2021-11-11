@@ -24,10 +24,6 @@ int main(){
 
     }
 
-    //cout<<m[27]<<endl;
-
-    cout << "Contador " << contador << endl;
-
     double h = 0;
 
     for(it = m.begin(); it != m.end(); it++){
