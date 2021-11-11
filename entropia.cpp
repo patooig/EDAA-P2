@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include<iostream>
+#include<map>
 #include<math.h>
 
 using namespace std;
@@ -6,10 +7,10 @@ using namespace std;
 int main(){
 
     int c;
-    int contador=0;
+    int contador = 0;
     map<int,int> m;
     map<int,int>::iterator it;
-
+    
     while(cin>>c){
 
         contador++;
