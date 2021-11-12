@@ -4,24 +4,36 @@
 using namespace std;
 using namespace sdsl;
 
-
+typedef vector<vector<bool>> vvb;
 
 int main(int argc, char * argv[]){
 
     int n = atoi(argv[1]);
     int c;
     int i = 0;
+    int size_row = n;
     
-    //n = n*n*120;
+    n = n*n*5;
 
 
     //Punto 2:
 
     int_vector<8> iv(n);
+
+    //para el punto 5:
+    
+    vector<int> input;
+
+    
+    
+    vector<vvb> BM;
+    //
     
     while(cin>>c){
         iv[i] = c;
         i++;
+
+        input.push_back(c);
         //Insertemos los primeros n en el int_vector<> iv//
         //Pasados los primeros n, push_back(iv);
         /*if(i==n){
@@ -34,134 +46,124 @@ int main(int argc, char * argv[]){
 
     }
 
-    
-
-    int_vector<8>::iterator it;
-
-   
-    for (it = iv.begin() ; it != iv.end(); it++){
-        
-        cout << (int)*it << " ";
-    }
-    
-    cout << endl;
-
-    //Punto 3:
-
- /*   
-    int_vector<> iv;
-    iv[0] = 1;
-    iv[2] = 1;
-    iv[3] = 2;
-    iv[4] = 2;
-
-
     bit_vector b_p(n);  
-    int_vector <8> v_p;  
+    vector<int> v_p;
+      
 
-    int i=0;
+    i=0;
     int j=0;
     int k =0;
-    int x = 0;
 
-/*    // Pato's Version
+    // Pato's Version
     
     bool first = true;
     while(j<n){
 
         if(iv[j]!= iv[i]){ // Son distintos
 
-            for ( k = i; k < j; i++){
+            for ( k = i; k < j; k++){
                 if(first){
                     b_p[k] = 1;
                     first = false;
-                    v_p[x] = iv[k];
-                    x++;
+                    v_p.push_back(iv[k]); // Almacena los núm.
                 } 
-                b_p[k] = 0;
+                else b_p[k] = 0; // b_p almacena 0
             }
 
             i = j;
             first = true;
-            
         }
+        
         if(iv[j] == iv[i]) j++;  // Son iguales
         
     }
-    for ( k = i; k < j; i++){
+    for ( k = i; k < j; k++){
         if(first){
             b_p[k] = 1;
             first = false;
-            v_p[x] = iv[k];
-        } 
-        b_p[k] = 0;
+            v_p.push_back(iv[k]);
+        }else b_p[k] = 0;
     }
-    
-*/
-    //Versión Leonardo Aravena Cuevas
 
-    bit_vector bl(n); //Bit vector
+    int_vector <8> v_pp(v_p.size());
 
-    int_vector<8>::iterator jt;
-    
-    int_vector<8> vLeo(n); //v'
+    //Punto 3:
+
+    bit_vector::iterator it;
+    vector<int>::iterator itv;
+
+    for (it = b_p.begin(); it != b_p.end(); it++)
+    {
+        cout << (int)*it << " ";
+    }
+    cout << endl;
+    int x  =0;
+    for(itv = v_p.begin(); itv != v_p.end() ; itv++){
+        v_pp[x] =*itv;
+        x++;
+        cout <<  *itv << " " ;
+    }
+    cout << endl;
+
+    int_vector<8>::iterator ivi ;
+
+    for (ivi = v_pp.begin(); ivi != v_pp.end(); ivi++)
+    {
+        cout << (int)*ivi << " ";
+    }
+    cout <<endl;
+
+    //Punto 4:
 
 
-    
-    it = iv.begin();//Primer índice
-    jt = it++;      //Segundo índice    
+    i=0;
+    j=size_row*size_row;
 
+    vector<bool> temp(size_row);
+    x = 0;
+    int y = 0;
+    vector<vector<bool>> M; // Matriz
 
-    bl[0] = 1; //Primer elemento del bit_vector es cero
-    
-    int r = 1; //índice para iterar en el bit_vector
-    int l = 1; //índice para iterar en v'
+    cout<<endl;
+    while(j<n){
 
-    vLeo[0] = *it; //Primer elemento de v' es el primer elemento del int_vector
+        if(input.at(i) == input.at(j)){
 
-    //El segundo índice itera hasta el final del int_vector
-    while(jt != iv.end()){
-
-        //Si hay coincidencia en los números
-        if(*it == *jt){
-             
-            bl[r] = 0;  //Se coloca el cero en el bit_vector y
-            r++;        //Se incrementa su índice
-            jt++;       //Se avanza al siguiente número del iv
-        
+            temp[x] = 0;
+            x++;
         }
 
-        //Si hay números distintos
         else{
-                    
-            bl[r] = 1;  //Se coloca el 1 en el bit vector
-            r++;        //Se incrementa su índice    
 
-            vLeo[l] = *jt; //Se guarda el valor del nuevo número en v'
-            l++; //Se incrementa su índice
-
-            it = jt;    //El primer índice toma el valor del índice donde 
-                        //Ocurre la diferencia de los números
-            jt = it++;  //Se incrimenta el segundo índice            
+            temp[x] = 1;
+            x++;
         }
-        
+
+        i++;
+        j++;
+        if(x == size_row){ 
+
+            M.push_back(temp); 
+            for(int l = 0; l < temp.size(); l++){
+
+                cout<<temp.at(l)<<" ";
+            }
+            cout <<endl;
+            x = 0;
+            y++;
+            
+        }
+
+        if(y == size_row){
+
+            BM.push_back(M);
+
+            
+            M.clear();
+            
+            y = 0;
+        }
     }
-
-    bit_vector::iterator bt;
-
-    for(it = vLeo.begin(); it != vLeo.end(); it++){
-
-        cout<<*it<<" ";
-    }
-
-    cout<<endl;
-
-    for(bt = bl.begin(); bt != bl.end(); bt++){
-
-        cout<<*bt<<" ";
-    }
-
-    cout<<endl;
 
     return 0;
 }
