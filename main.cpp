@@ -7,7 +7,7 @@ using namespace sdsl;
 typedef vector<vector<bool>> vvb;
 
 int main(int argc, char * argv[]){
-
+    //ola
     int n = atoi(argv[1]);
     int c;
     int i = 0;
