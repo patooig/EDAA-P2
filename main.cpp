@@ -15,11 +15,10 @@ int main(int argc, char * argv[]){
     int size_row = n;
     
     
-    n = n*n*120;
+    n = n*n*5;
 
 
     //Punto 2:
-
     int_vector<8> iv(n);
 
     //para el punto 5:
@@ -41,6 +40,11 @@ int main(int argc, char * argv[]){
     }
 
     nombreClase * nC = new nombreClase(iv,size_row);
+    nC->createBitmap();
+    nC->createRRRVector();
+    //nC->printVprima();
+    
+    //nC->createK2Tree();
     delete nC;
 
     /*

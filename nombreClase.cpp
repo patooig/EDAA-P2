@@ -1,4 +1,5 @@
 #include "nombreClase.h"
+#include <sdsl/k2_tree.hpp>
 
 using namespace std;
 using namespace sdsl;
@@ -8,15 +9,44 @@ nombreClase::nombreClase(const int_vector<8> &ivv, int rS){
     iv = ivv;
     bv.resize(ivSize); // Asignar tamaño a bitvector
     rowSize = rS;
-    
+    cout << (int)size_in_bytes(iv) << endl;
     
 }
 
 nombreClase::~nombreClase(){
-
+    
 }
 
-void nombreClase::createBitmap(int_vector<8> iv){
+void nombreClase::createRRRVector(){
+    bit_vector::iterator i;
+    cout <<"siv bv " << size_in_bytes(bv)<<endl;
+
+    rv = new rrr_vector<>(bv);
+    cout << "siv " << size_in_bytes(*rv)<<endl;
+    cout << rv->size() << endl;
+
+    for ( i = bv.begin(); i != bv.end(); i++)
+    {
+        cout << *i << " ";
+    }
+    cout << endl;
+    rank_support_rrr<> rsr();
+    
+
+    rrr_vector<>::iterator it;
+    for (it = rv->begin(); it!= rv->end() ; it++){
+        cout << *it << " ";
+    }
+    
+    
+    cout << endl;
+
+    /*sv = new sd_vector<>(bv);
+    cout << "siv " << size_in_bytes(*sv)<<endl;
+    cout << sv->size() << endl;*/
+}
+
+void nombreClase::createBitmap(){
 
     int i = 0, j = 0, k = 0;
     bool first = true;
@@ -52,22 +82,22 @@ void nombreClase::createBitmap(int_vector<8> iv){
 
 }
 
-void nombreClase::vectorToIntVector(){
-    /*vector<int>::iterator itv;
-    v.resize(v_p.size());
-    int x = 0;
-    for(itv = v_p.begin(); itv != v_p.end() ; itv++){
-        v[x] =*itv;
-        x++;
+void nombreClase::printVprima(){
+    int_vector<8>::iterator it;
+    for (it = v.begin() ; it != v.end() ; it++)   {
+        cout << (int)*it << " " ;
     }
-    */
+    cout << endl;
+    
+}
+
+void nombreClase::vectorToIntVector(){
     v.resize(v_p.size());
     int s = v_p.size();
     for (int i = 0; i < s; i++)
     {
         v[i] = v_p[i];
-    }
-    
+    } 
 }
 
 double nombreClase::calculateEntropy(){
@@ -101,6 +131,7 @@ double nombreClase::calculateEntropy(){
 }
 
 void nombreClase::createK2Tree(){
+    
     int i=0;
     int j= rowSize * rowSize;
 
@@ -108,6 +139,10 @@ void nombreClase::createK2Tree(){
     int x = 0;
     int y = 0;
     vector<vector<int>> M; // Matriz
+
+    sdsl::k2_tree<4> *k2;
+    vector<k2_tree<4>*> vK2;
+    
 
     while(j<ivSize){
 
@@ -129,7 +164,24 @@ void nombreClase::createK2Tree(){
 
             M.push_back(temp); 
             x = 0;
+            y++;
             
+        }
+        
+        if(y == rowSize){
+
+            k2 = new k2_tree<4>(M);
+
+            
+            int sk2 = size_in_bytes(*k2); // ??????????????????
+
+            cout<<"sk2: " <<sk2<<endl;
+
+            vK2.push_back(k2);
+            
+            M.clear();
+            
+            y = 0;
         }
     } 
 }
