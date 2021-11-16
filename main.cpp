@@ -9,6 +9,7 @@ typedef vector<vector<bool>> vvb;
 int main(int argc, char * argv[]){
     //ola
     //a
+    //Chao!!
     int n = atoi(argv[1]);
     int c;
     int i = 0;
