@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sdsl/int_vector.hpp>
+#include "nombreClase.h"
 
 using namespace std;
 using namespace sdsl;
@@ -13,7 +14,8 @@ int main(int argc, char * argv[]){
     int i = 0;
     int size_row = n;
     
-    n = n*n*5;
+    
+    n = n*n*120;
 
 
     //Punto 2:
@@ -35,17 +37,13 @@ int main(int argc, char * argv[]){
 
         input.push_back(c);
         //Insertemos los primeros n en el int_vector<> iv//
-        //Pasados los primeros n, push_back(iv);
-        /*if(i==n){
-            i = 0;
-            matriz.push_back(iv);
-        }
-        iv[i] = c;
-        i++; */
-         
-
+        //Pasados los primeros n, push_back(iv)
     }
 
+    nombreClase * nC = new nombreClase(iv,size_row);
+    delete nC;
+
+    /*
     bit_vector b_p(n);  
     vector<int> v_p;
       
@@ -113,7 +111,7 @@ int main(int argc, char * argv[]){
     }
     cout <<endl;
 
-    //Punto 4:
+    //Punto 5:
 
 
     i=0;
@@ -123,11 +121,12 @@ int main(int argc, char * argv[]){
     x = 0;
     int y = 0;
     vector<vector<bool>> M; // Matriz
+    
 
     cout<<endl;
     while(j<n){
 
-        if(input.at(i) == input.at(j)){
+        if(input.at(i) == input.at(j)){ // Cambiar input por iv
 
             temp[x] = 0;
             x++;
@@ -163,7 +162,7 @@ int main(int argc, char * argv[]){
             
             y = 0;
         }
-    }
+    }*/
 
     return 0;
 }
