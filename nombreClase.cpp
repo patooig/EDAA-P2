@@ -1,5 +1,6 @@
 #include "nombreClase.h"
 #include <sdsl/k2_tree.hpp>
+#include <sdsl/util.hpp>
 
 using namespace std;
 using namespace sdsl;
@@ -19,20 +20,29 @@ nombreClase::~nombreClase(){
 
 void nombreClase::createRRRVector(){
     bit_vector::iterator i;
-    cout <<"siv bv " << size_in_bytes(bv)<<endl;
+    cout <<"siv bitvecor " << size_in_bytes(bv)<<endl;
 
+    // Se crea rrr_vector a partir de bitvector
     rv = new rrr_vector<>(bv);
-    cout << "siv " << size_in_bytes(*rv)<<endl;
+    cout << "siv rrr_vector" << size_in_bytes(*rv)<<endl;
     cout << rv->size() << endl;
 
+    //Imprime bitvector
     for ( i = bv.begin(); i != bv.end(); i++)
     {
         cout << *i << " ";
     }
     cout << endl;
-    rank_support_rrr<> rsr();
+
+    // Tipo rank1 a rv 
+    rrr_vector<>::rank_1_type rank_rrr(rv);
+    
+    // Consulta rank
+    cout << "rank" << rank_rrr(6)<< endl; //   pos [1...n]
     
 
+    
+    //Imprime rrr_vector
     rrr_vector<>::iterator it;
     for (it = rv->begin(); it!= rv->end() ; it++){
         cout << *it << " ";
