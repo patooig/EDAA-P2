@@ -42,7 +42,9 @@ int main(int argc, char * argv[]){
     nombreClase * nC = new nombreClase(iv,size_row);
     nC->createBitmap();
     nC->createRRRVector();
+    cout << "rank main: " << nC->rank(6)<<endl;
     //nC->printVprima();
+    cout << "rank main: " << nC->rank(7)<<endl;
     
     //nC->createK2Tree();
     delete nC;

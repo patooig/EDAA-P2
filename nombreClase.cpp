@@ -11,6 +11,8 @@ nombreClase::nombreClase(const int_vector<8> &ivv, int rS){
     bv.resize(ivSize); // Asignar tamaño a bitvector
     rowSize = rS;
     cout << (int)size_in_bytes(iv) << endl;
+    firstRank = true;
+    
     
 }
 
@@ -28,33 +30,29 @@ void nombreClase::createRRRVector(){
     cout << rv->size() << endl;
 
     //Imprime bitvector
-    for ( i = bv.begin(); i != bv.end(); i++)
-    {
+    for ( i = bv.begin(); i != bv.end(); i++){
         cout << *i << " ";
     }
     cout << endl;
 
     // Tipo rank1 a rv 
     rrr_vector<>::rank_1_type rank_rrr(rv);
-    
-    // Consulta rank
-    cout << "rank" << rank_rrr(6)<< endl; //   pos [1...n]
-    
+    rank1 = rank_rrr;
+
 
     
-    //Imprime rrr_vector
-    rrr_vector<>::iterator it;
-    for (it = rv->begin(); it!= rv->end() ; it++){
-        cout << *it << " ";
-    }
-    
-    
-    cout << endl;
+    sv = new sd_vector<>(bv);
+    cout << "siv sdvector " << size_in_bytes(*sv)<<endl;
 
-    /*sv = new sd_vector<>(bv);
-    cout << "siv " << size_in_bytes(*sv)<<endl;
-    cout << sv->size() << endl;*/
+    
+    
 }
+
+int nombreClase::rank(int i){
+  
+    return rank1(i);
+}
+
 
 void nombreClase::createBitmap(){
 

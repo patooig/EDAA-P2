@@ -20,6 +20,7 @@ class nombreClase{
     int rowSize; //Cantidad de elementos por fila
     rrr_vector<> * rv;
     sd_vector<> * sv;
+    rrr_vector<>::rank_1_type rank1;
 
     
     void vectorToIntVector();
@@ -35,6 +36,7 @@ class nombreClase{
     void createK2Tree();
     double calculateEntropy(); 
     void printVprima();
+    int rank(int i);
 };
 
 #endif
