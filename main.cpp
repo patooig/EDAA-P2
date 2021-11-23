@@ -15,32 +15,20 @@ int main(int argc, char * argv[]){
     int i = 0;
     int size_row = n;
     
-    
     n = n*n*m;
 
-
-    //Punto 2:
     int_vector<8> iv(n);
-
-    //para el punto 5:
     
-    vector<int> input;
-
-    
-    
-    vector<vvb> BM;
-    //
-    
+    //Almacenamiento en el int_vector
     while(cin>>c){
+
         iv[i] = c;
         i++;
 
-        input.push_back(c);
-        //Insertemos los primeros n en el int_vector<> iv//
-        //Pasados los primeros n, push_back(iv)
     }
 
     nombreClase * nC = new nombreClase(iv,size_row);
+
     nC->createBitmap();
     nC->createRRRVector();
 
