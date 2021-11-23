@@ -9,7 +9,7 @@
 using namespace sdsl;
 using namespace std;
 
-class nombreClase{
+class Compacta{
     private:
     int size_k2=0;  // Tamaño de todos los k2 tree
     int_vector<8> iv; // v
@@ -37,8 +37,8 @@ class nombreClase{
     
 
     public: 
-    nombreClase(const int_vector<8> &ivv, int rS);
-    ~nombreClase();
+    Compacta(const int_vector<8> &ivv, int rS);
+    ~Compacta();
     void createRRRVector();
     void createBitmap();
     int createK2Tree();

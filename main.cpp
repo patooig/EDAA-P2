@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sdsl/int_vector.hpp>
-#include "nombreClase.h"
+#include "Compacta.h"
 
 using namespace std;
 using namespace sdsl;
@@ -27,7 +27,7 @@ int main(int argc, char * argv[]){
 
     }
 
-    nombreClase * nC = new nombreClase(iv,size_row);
+    Compacta * nC = new Compacta(iv,size_row);
 
     nC->createBitmap();
     nC->createRRRVector();

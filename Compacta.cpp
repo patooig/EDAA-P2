@@ -1,11 +1,11 @@
-#include "nombreClase.h"
+#include "Compacta.h"
 #include <fstream>
 #include <sdsl/k2_tree.hpp>
 
 using namespace std;
 using namespace sdsl;
 
-nombreClase::nombreClase(const int_vector<8> &ivv, int rS){
+Compacta::Compacta(const int_vector<8> &ivv, int rS){
     
     ivSize = ivv.size();
     iv = ivv;
@@ -19,7 +19,7 @@ nombreClase::nombreClase(const int_vector<8> &ivv, int rS){
     first = true;
 }
 
-nombreClase::~nombreClase(){
+Compacta::~Compacta(){
     // Destructor
     delete rv;
     delete sv;
@@ -27,7 +27,7 @@ nombreClase::~nombreClase(){
 }
 
 // Se crea rrr_vector a partir de bitvector
-void nombreClase::createRRRVector(){
+void Compacta::createRRRVector(){
 
     rv = new rrr_vector<>(bv);
     // Tipo rank1 a rv 
@@ -42,7 +42,7 @@ void nombreClase::createRRRVector(){
 
 
 // Crear SD_VECTOR
-void nombreClase::createSDVector(){
+void Compacta::createSDVector(){
     
     sv = new sd_vector<>(bv);
    
@@ -54,17 +54,17 @@ void nombreClase::createSDVector(){
     
 }
 
-int nombreClase::rank_rrr(int i){
+int Compacta::rank_rrr(int i){
   
     return rank_rrr1(i);
 }
 
-int nombreClase::rank_sd(int i){
+int Compacta::rank_sd(int i){
 
     return rank_sd1(i);
 }
 
-void nombreClase::createBitmap(){
+void Compacta::createBitmap(){
 
     int i = 0, j = 0, k = 0;
     bool first = true;
@@ -104,7 +104,7 @@ void nombreClase::createBitmap(){
 }
 
 
-void nombreClase::vectorToIntVector(){
+void Compacta::vectorToIntVector(){
     
     v.resize(v_p.size());
     int s = v_p.size();
@@ -116,7 +116,7 @@ void nombreClase::vectorToIntVector(){
     write_structure<HTML_FORMAT>(v,out);
 }
 
-double nombreClase::calculateEntropy(){
+double Compacta::calculateEntropy(){
 
     int c;
     double h = 0;
@@ -146,7 +146,7 @@ double nombreClase::calculateEntropy(){
 
 }
 
-int nombreClase::createK2Tree(){
+int Compacta::createK2Tree(){
     
     int i=0;
     int j= rowSize * rowSize;
@@ -214,7 +214,7 @@ int nombreClase::createK2Tree(){
     return size_k2; 
 }
 
-void nombreClase::diferencias(){
+void Compacta::diferencias(){
     
     int i=0;
     int j= rowSize * rowSize;
