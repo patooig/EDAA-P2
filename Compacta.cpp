@@ -262,6 +262,8 @@ void Compacta::diferencias(){
         }    
     }
     
+    cout<<"vdif: "<<size_in_bytes(vdif)<<endl;
+
     delete diff;
 
 }
