@@ -11,11 +11,11 @@ using namespace std;
 
 class Compacta{
     private:
-    int size_k2=0;  // Tamaño de todos los k2 tree
-    int_vector<8> iv; // v
+    int size_k2;  // Tamaño de todos los k2 tree
+    int_vector<8> iv; // Almacena todo el dataset
     bit_vector bv;  // bit vector
-    vector<int> v_p; // vector temporal, almacena v'
-    int_vector<8> v; // v'
+    vector<int> * v_p; // vector temporal, almacena v'
+    int_vector<8> v; // v' 
     int ivSize; //Cantidad de elementos del int_vector
     int rowSize; //Cantidad de elementos por fila
 
@@ -26,15 +26,11 @@ class Compacta{
     sd_vector<>::rank_1_type rank_sd1;
     
     //Parte 6
-    int_vector<4> vdif;
-    bit_vector signo;
-
-    bool first;
+    int_vector<4> vdif; //Vector de diferencias entre matrices contiguas
+    bit_vector signo; //Signos de las diferencias
 
     void vectorToIntVector();
-    void deletevK2();
 
-    
 
     public: 
     Compacta(const int_vector<8> &ivv, int rS);

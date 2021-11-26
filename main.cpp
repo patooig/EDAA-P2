@@ -9,37 +9,52 @@ typedef vector<vector<bool>> vvb;
 
 int main(int argc, char * argv[]){
     
-    int n = atoi(argv[1]);
-    int m = atoi(argv[2]);
+    int n = atoi(argv[1]);   //Número de filas.
+    int m = atoi(argv[2]);   //Número de matrices.
     int c;
     int i = 0;
-    int size_row = n;
+    int size_row = n; //Cantidad de elementos en una fila
     
-    n = n*n*m;
+    n = n*n*m; //Cantidad total de elementos del dataset
 
     int_vector<8> iv(n);
     
-    //Almacenamiento en el int_vector
+    //Lectura del archivo y almacenamiento en el int_vector
     while(cin>>c){
 
         iv[i] = c;
         i++;
-
     }
 
+
+    //Creación del objeto nC de la clase 'Compacta'
+    //En su constructor se entrega el int_vector con los elementos
+    //Del dataset y la cantidad de elementos por fila.
     Compacta * nC = new Compacta(iv,size_row);
 
-//     cout << "tamaño iv: " << size_in_bytes(iv) << endl;
-
+    //Creamos bitmap
     nC->createBitmap();
+
+    //Creamos rrrvector
     nC->createRRRVector();
+
+    //Creamos sdvector
     nC->createSDVector();
 
-    double time_rrr = 0;
-    double time_sd  = 0;
+    //Creamos K2-TREE
+    nC->createK2Tree();
 
-    int num;
-    // RANK RRR_VECTOR
+    //Creamos Matriz con diferencias
+    nC->diferencias();
+
+    
+    
+    //Variables para calcular tiempo
+//    double time_rrr = 0;
+//    double time_sd  = 0;
+
+//     int num;
+//     RANK RRR_VECTOR
 //     clock_t start;
 //
 //     for (int i = 0; i < 100; i++){
@@ -77,14 +92,12 @@ int main(int argc, char * argv[]){
 //
 //     cout<<"size k2 tree: \n"<<nC->createK2Tree()<<endl;
 
-        nC->diferencias();
+    
 
 //     cout << "Entropia " <<nC->calculateEntropy()<<endl;
 
     
-    
-
- 
+    //Liberamos nC
     delete nC;
 
     return 0;
