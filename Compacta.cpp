@@ -9,7 +9,7 @@ Compacta::Compacta(const int_vector<8> &ivv, int rS){
     
     ivSize = ivv.size();
     iv = ivv;
-    bv.resize(ivSize); // Asignar tamaño a bitvector
+    bv.resize(ivSize); // Asigna tamaño a bitvector
     rowSize = rS;
     
     
@@ -30,6 +30,7 @@ Compacta::~Compacta(){
 void Compacta::createRRRVector(){
 
     rv = new rrr_vector<>(bv);
+    cout << "size rv :" <<size_in_bytes(*rv) << endl;
     // Tipo rank1 a rv 
     rrr_vector<>::rank_1_type rank_rrr(rv);
     rank_rrr1 = rank_rrr;
@@ -45,6 +46,8 @@ void Compacta::createRRRVector(){
 void Compacta::createSDVector(){
     
     sv = new sd_vector<>(bv);
+    
+    cout << "size sd :" <<size_in_bytes(*sv) << endl;
    
     sd_vector<>::rank_1_type rank_sd(sv);
     rank_sd1 = rank_sd;
@@ -98,6 +101,10 @@ void Compacta::createBitmap(){
     }
     vectorToIntVector();
 
+    cout << "Tamaño BITVECTOR: " << size_in_bytes(bv) << endl;
+
+    cout << "Tamaño INT_VEC V: " << size_in_bytes(v) << endl;
+
     ofstream out("bit_vector.html");
     write_structure<HTML_FORMAT>(bv,out);
 
@@ -150,12 +157,12 @@ int Compacta::createK2Tree(){
     
     int i=0;
     int j= rowSize * rowSize;
-
+    clock_t start;
     vector<int> temp(rowSize);
     int x = 0;
     int y = 0;
     vector<vector<int>> M; // Matriz
-
+    double time_k2;
     k2_tree<4> *k2;
     //k2_tree<4> *k1;
 
@@ -187,8 +194,9 @@ int Compacta::createK2Tree(){
         }
         
         if(y == rowSize){
-
+            start = clock();
             k2 = new k2_tree<4>(M);
+            time_k2+=(double)(clock()-start)/CLOCKS_PER_SEC;
             
             if(first){
                 ofstream out("k2.html");
@@ -207,7 +215,11 @@ int Compacta::createK2Tree(){
             
             y = 0;
         }
+
+        
     }
+
+    printf("Tiempo total k2 : %.8f\n",time_k2);
 
     
 
